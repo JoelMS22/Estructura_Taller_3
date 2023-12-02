@@ -20,5 +20,6 @@ public:
 	string getOperatorCity();
 	void infoTrabajador();
 
+
 };
 

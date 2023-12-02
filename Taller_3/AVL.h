@@ -11,6 +11,8 @@ private:
 	int obtenerBalance(Nodo* nodo);
 	Nodo* insertar(Nodo* nodo, Trabajador trabajador);
 	void inOrder(Nodo* nodo);
+	bool buscarIdRec(Nodo* nodo, int id);
+	void eliminarArbolRec(Nodo* nodo);
 
 public:
 	AVL();
@@ -21,6 +23,9 @@ public:
 	int getBalance(Nodo* nodo);
 	int TotalNodos(Nodo* nodo);
 	int TotalNodos();
+	bool buscarId(int id);
+	void eliminarArbol();
+
 
 	Nodo* rotacionSimpleDerecha(Nodo* nodo);
 	Nodo* rotacionSimpleIzquierda(Nodo* nodo);

@@ -69,6 +69,36 @@ void AVL::inOrder(Nodo* nodo)
     }
 }
 
+bool AVL::buscarIdRec(Nodo* nodo, int id)
+{
+    if (nodo == nullptr) {
+        return false;
+    }
+    if (nodo->getDato() == id) {
+        return true;
+    }
+    if (id < nodo->getDato()) {
+        return buscarIdRec(nodo->getIzq(), id);
+    }
+    else
+    {
+        return buscarIdRec(nodo->getDer(), id);
+    }
+
+    return false;
+}
+
+void AVL::eliminarArbolRec(Nodo* nodo)
+{
+    if (nodo == nullptr) {
+        return;
+    }
+    eliminarArbolRec(nodo->getIzq()); // Elimina el subárbol izquierdo
+    eliminarArbolRec(nodo->getDer()); // Elimina el subárbol derecho
+
+    delete nodo; // Elimina el nodo actual
+}
+
 AVL::AVL() : raiz(nullptr)
 {
 }
@@ -139,9 +169,16 @@ int AVL::TotalNodos()
 
 }
 
+bool AVL::buscarId(int id)
+{
+    return buscarIdRec(this->raiz,id);
+}
 
-
-
+void AVL::eliminarArbol()
+{
+    return eliminarArbolRec(this->raiz);
+    raiz = nullptr;
+}
 
 
 
