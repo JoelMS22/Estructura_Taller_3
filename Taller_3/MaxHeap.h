@@ -1,22 +1,17 @@
 #pragma once
+#include <iostream>
 #include <vector>
+#include "Evento.h" // Asegúrate de incluir el archivo de encabezado de Eventos
 using namespace std;
-class MaxHeap
-
-{
+class MaxHeap {
 private:
-	vector<float> heap;
+    vector<Evento> heap;
 
-	void turnIntoMaxHeap(int index);
-
-	void Swap(float& a, float& b);
+    void turnIntoMaxHeap(int index);
+    void Swap(Evento& a, Evento& b);
 
 public:
-	MaxHeap();
-
-	void insert(float value);
-
-	void printHeap();
-
-
+    MaxHeap();
+    void insert(Evento value);
+    void printHeap();
 };

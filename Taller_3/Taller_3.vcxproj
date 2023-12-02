@@ -129,15 +129,19 @@
   <ItemGroup>
     <ClCompile Include="Archivos.cpp" />
     <ClCompile Include="AVL.cpp" />
+    <ClCompile Include="Evento.cpp" />
     <ClCompile Include="MaxHeap.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Nodo.cpp" />
-    <ClCompile Include="Taller_3.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="Trabajador.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Archivos.h" />
     <ClInclude Include="AVL.h" />
+    <ClInclude Include="Evento.h" />
     <ClInclude Include="MaxHeap.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Nodo.h" />
     <ClInclude Include="Trabajador.h" />
   </ItemGroup>
