@@ -15,6 +15,4 @@ public:
 
     void lecturaArchivos(AVL& avl, MaxHeap& maxheap);
 
-
-
 };

@@ -35,12 +35,9 @@ void MaxHeap::eliminarRaiz() {
     if (heap.size() <= 1) {
         std::cout << "No hay equipos que hayan registrado eventos de salud." << endl;
         return;
-    }
-    
+    } 
     infoRaiz();
-
     delete heap[1]; // Liberar memoria del objeto en la raíz antes de reemplazarlo
-
     heap[1] = heap[heap.size() - 1];
     heap.pop_back();
 

@@ -13,8 +13,11 @@ private:
 public:
     // Constructor que acepta punteros a las instancias
     Menu(AVL* avlInstancia, MaxHeap* maxheapInstancia, Archivos* archivoInstancia);
+    string agregarEspacios(string palabra);
 
     void mostrarMenu();
     void agregarEventoDeSalud();
     void atenderUnEquipo();
+
+    void operadoresAusentes();
 };

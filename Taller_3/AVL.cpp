@@ -54,11 +54,7 @@ Nodo* AVL::insertar(Nodo* nodo, Trabajador trabajador) // insertar, con recursio
         nodo->setDer(rotacionSimpleDerecha(nodo->getDer()));// rotacion simple derecha del hijo derecho, el resultado de la rotacion sera el hijo derecho del nodo
         return rotacionSimpleIzquierda(nodo); // Doble rotacion, primero simple derecha y luego simple izquierda
     }
-
-
-
     return nodo;
-  
 }
 
 void AVL::inOrder(Nodo* nodo)
@@ -185,6 +181,15 @@ void AVL::eliminarArbol()
 void AVL::desplegarInformacion(int id) {
     if (!buscarIdRec(raiz, id)) {
         cout << "No se encontro ningun trabajador con esa ID." << endl;
+    }
+}
+
+void AVL::obtenerTodasLasId(Nodo* nodo, vector<int>& todasLasId)
+{
+    if (nodo != nullptr) {
+        obtenerTodasLasId(nodo->getIzq(), todasLasId);
+        todasLasId.push_back(nodo->getDato());
+        obtenerTodasLasId(nodo->getDer(), todasLasId);
     }
 }
 

@@ -1,6 +1,8 @@
 #pragma once
 #include "Nodo.h"
 #include "Trabajador.h"
+#include <vector>
+using namespace std;
 
 class AVL
 {
@@ -26,6 +28,7 @@ public:
 	bool buscarId(int id);
 	void eliminarArbol();
 	void desplegarInformacion(int id);
+	void obtenerTodasLasId(Nodo* nodo, vector<int>& todasLasId);
 
 
 

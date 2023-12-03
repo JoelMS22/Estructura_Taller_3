@@ -1,7 +1,20 @@
 #include "Menu.h"
+#include <vector>
 
 Menu::Menu(AVL* avlInstancia, MaxHeap* maxheapInstancia, Archivos* archivoInstancia)
     : arbol(avlInstancia), maxheap(maxheapInstancia), archivo(archivoInstancia) {
+}
+
+string Menu::agregarEspacios(string palabra)
+{
+    string resultado;
+    for (size_t i = 0; i < palabra.length(); ++i) {
+        if (i > 0 && isupper(palabra[i]) && islower(palabra[i - 1])) {
+            resultado += ' '; // Agrega un espacio
+        }
+        resultado += palabra[i]; // Agrega el carácter actual
+    }
+    return resultado;
 }
 
 void Menu::mostrarMenu()
@@ -26,8 +39,6 @@ void Menu::mostrarMenu()
             continue; // Volver al inicio del bucle
         }
 
-
-
         switch (opcion) {
         case 1:
             cout << "------- AGREGAR EVENTO SALUD -------" << endl;
@@ -38,14 +49,17 @@ void Menu::mostrarMenu()
             atenderUnEquipo();
             break;
         case 3:
-            arbol->desplegarArbol(arbol->getRaiz(), 4);
-            maxheap->printHeap();
+            cout << "-------     REPORTABILIDAD    -------" << endl;
+
+            cout << "OPERADORES AUSENTES EN EVENTOS DE SALUD: " << endl << endl;
+            operadoresAusentes();
             break;
         case 4:
-            salir = true;
+
             arbol->eliminarArbol();
             maxheap->~MaxHeap();
             cout << "Saliendo del programa..." << endl;
+            salir = true;
             break;
         default:
             cout << "Opcion no valida. Por favor, ingrese una opcion valida." << endl;
@@ -66,7 +80,7 @@ void Menu::agregarEventoDeSalud()
         string ciudad;
 
         string idEquipo;
-        string eventoSalud;
+        string salud;
         float valorRegistro = 0.0;
 
 
@@ -82,9 +96,10 @@ void Menu::agregarEventoDeSalud()
 
             cout << "Ingrese el ID del equipo: ";
             cin >> idEquipo;
-            cout << "Ingrese el evento de salud: ";
-            cin >> eventoSalud;
+            cout << "Ingrese el evento de salud (Formato AaBbCc): ";
+            cin >> salud;
 
+            string eventoSalud = agregarEspacios(salud);
             if (eventoSalud == "Frame Torque Exceeded" || eventoSalud == "Negative High Peak Frame Bias" ||
                 eventoSalud == "Negative High Peak Frame Pitch" || eventoSalud == "Negative High Peak Frame Rack" ||
                 eventoSalud == "Positive High Peak Frame Bias" || eventoSalud == "Positive High Peak Frame Pitch" ||
@@ -113,10 +128,10 @@ void Menu::agregarEventoDeSalud()
                 cin >> ciudad;
                 cout << "Ingrese el ID del equipo: ";
                 cin >> idEquipo;
-                cout << "Ingrese el evento de salud: ";
-                cin >> eventoSalud;
-
-                if (eventoSalud == "FrameTorqueExceeded" || eventoSalud == "Negative High Peak Frame Bias" ||
+                cout << "Ingrese el evento de salud (Formato AaBbCc): ";
+                cin >> salud;
+                string eventoSalud = agregarEspacios(salud);
+                if (eventoSalud == "Frame Torque Exceeded" || eventoSalud == "Negative High Peak Frame Bias" ||
                     eventoSalud == "Negative High Peak Frame Pitch" || eventoSalud == "Negative High Peak Frame Rack" ||
                     eventoSalud == "Positive High Peak Frame Bias" || eventoSalud == "Positive High Peak Frame Pitch" ||
                     eventoSalud == "Positive High Peak Frame Rack" || eventoSalud == "Sprung Weight Exceeded") {
@@ -153,4 +168,22 @@ void Menu::atenderUnEquipo()
         arbol->desplegarInformacion(id);
     }
     maxheap->eliminarRaiz();
+}
+
+void Menu::operadoresAusentes()
+{
+    vector<int> todasLasIdsAVL;
+    arbol->obtenerTodasLasId(arbol->getRaiz(), todasLasIdsAVL);
+    for (int id : todasLasIdsAVL) {
+        bool existeEnMaxHeap = maxheap->existeId(id);
+
+        if (!existeEnMaxHeap) {
+        //    std::cout << "El ID " << id << " existe tanto en el AVL como en el MaxHeap." << std::endl;
+        //}
+       // else {
+          //  std::cout << "El ID " << id << " no existe en el MaxHeap." << std::endl;
+            arbol->buscarId(id);
+            cout << endl;
+        }
+    }
 }

@@ -33,7 +33,7 @@ string Trabajador::getOperatorCity()
 void Trabajador::infoTrabajador()
 {
     cout << "Numero de identificacion del Operador: " << this->operatorId << endl
-        << "Nombre del Operador: ";
+         << "Nombre del Operador: ";
          if (!this->operatorName.empty()) {
              // Convertir el primer carácter a mayúscula
              this->operatorName[0] = toupper(this->operatorName[0]);
