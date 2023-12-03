@@ -54,7 +54,6 @@ void Archivos::lecturaArchivos(AVL& avl, MaxHeap& maxheap) {
 
             getline(lineStream, floatValueStr, ';');
             float floatValue = stof(floatValueStr);
-
             Evento evento(equipementID, operatorId, event, floatValue);
             maxheap.insert(evento);
         }

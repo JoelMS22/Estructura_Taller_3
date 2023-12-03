@@ -15,6 +15,7 @@ public:
 	Nodo();
 	Nodo(Trabajador trabajador);
 	int getDato();
+	Trabajador getTrabajador();
 	Nodo* getDer();
 	Nodo* getIzq();
 

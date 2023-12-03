@@ -6,21 +6,18 @@ class Evento
 {
 
 private:
-	string equipementID;
+	string equipementId;
 	int operatorId;
 	string event;
 	float floatValue;
 
 public:
 
-	Evento(string equipementID, int operatorId, string event, float floatValue);
+	Evento(string equipementId, int operatorId, string event, float floatValue);
 
-	string getEquipementID();
-
+	string getEquipementId();
 	int getOperatorId();
-
 	string getEvent();
-
 	float getFloatValue();
 
 

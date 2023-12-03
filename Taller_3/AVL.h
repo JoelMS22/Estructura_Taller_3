@@ -25,6 +25,9 @@ public:
 	int TotalNodos();
 	bool buscarId(int id);
 	void eliminarArbol();
+	void desplegarInformacion(int id);
+
+
 
 
 	Nodo* rotacionSimpleDerecha(Nodo* nodo);

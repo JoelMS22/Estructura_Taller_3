@@ -9,6 +9,7 @@ Nodo::Nodo()
 
 Nodo:: Nodo(Trabajador trabajador) {
     this->dato = trabajador.getOperatorId();
+    this->trabajador = trabajador;
     this->izq = nullptr;
     this->der = nullptr;
 }
@@ -22,6 +23,11 @@ int Nodo::getDato()
         return 0;
     }
        
+}
+
+Trabajador Nodo::getTrabajador()
+{
+    return this->trabajador;
 }
 
 Nodo* Nodo::getDer()

@@ -16,5 +16,5 @@ public:
 
     void mostrarMenu();
     void agregarEventoDeSalud();
-    
+    void atenderUnEquipo();
 };

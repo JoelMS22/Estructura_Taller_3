@@ -6,36 +6,49 @@ Menu::Menu(AVL* avlInstancia, MaxHeap* maxheapInstancia, Archivos* archivoInstan
 
 void Menu::mostrarMenu()
 {
-    int opcion;
+   
     bool salir = false;
-
+    int opcion;
     while (!salir) {
-        cout << "---------------------MENU-------------------------" << endl;
+        
+        cout << "--------------- MENU ---------------" << endl;
         cout << "[1] Agregar un evento de salud." << endl;
         cout << "[2] Atender un equipo." << endl;
         cout << "[3] Reportabilidad." << endl;
         cout << "[4] Salir." << endl;
         cout << "Ingrese una opcion: ";
 
-        cin >> opcion;
+        if (!(cin >> opcion)) {
+            // Limpiar el estado de error de cin y descartar la entrada incorrecta
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Entrada no valida. Por favor, ingrese un numero." << endl;
+            continue; // Volver al inicio del bucle
+        }
+
+
 
         switch (opcion) {
         case 1:
-            arbol->desplegarArbol(arbol->getRaiz(), 5);
+            cout << "------- AGREGAR EVENTO SALUD -------" << endl;
+            agregarEventoDeSalud();
             break;
         case 2:
-
+            cout << "-------     ATENDER EQUIPO    -------" << endl;
+            atenderUnEquipo();
             break;
         case 3:
-
+            arbol->desplegarArbol(arbol->getRaiz(), 4);
+            maxheap->printHeap();
             break;
         case 4:
             salir = true;
             arbol->eliminarArbol();
+            maxheap->~MaxHeap();
             cout << "Saliendo del programa..." << endl;
             break;
         default:
-            cout << "Opción no válida. Por favor, ingrese una opción válida." << endl;
+            cout << "Opcion no valida. Por favor, ingrese una opcion valida." << endl;
             break;
         }
     }
@@ -43,5 +56,101 @@ void Menu::mostrarMenu()
 
 void Menu::agregarEventoDeSalud()
 {
+    bool agregar = false;
+    while (!agregar) {
 
+        int inID;
+        string eleccion;
+
+        string nombre;
+        string ciudad;
+
+        string idEquipo;
+        string eventoSalud;
+        float valorRegistro = 0.0;
+
+
+        cout << "Ingrese el ID del operador: ";
+        cin >> inID;
+
+        if (arbol->buscarId(inID) == true && maxheap->existeId(inID) == true) {
+
+            cout << "¡Ya existe un Evento de Salud asociado a este Operador! " << endl;
+            agregar = true;
+        }
+        else if (arbol->buscarId(inID) == true && maxheap->existeId(inID) == false) {
+
+            cout << "Ingrese el ID del equipo: ";
+            cin >> idEquipo;
+            cout << "Ingrese el evento de salud: ";
+            cin >> eventoSalud;
+
+            if (eventoSalud == "Frame Torque Exceeded" || eventoSalud == "Negative High Peak Frame Bias" ||
+                eventoSalud == "Negative High Peak Frame Pitch" || eventoSalud == "Negative High Peak Frame Rack" ||
+                eventoSalud == "Positive High Peak Frame Bias" || eventoSalud == "Positive High Peak Frame Pitch" ||
+                eventoSalud == "Positive High Peak Frame Rack" || eventoSalud == "Sprung Weight Exceeded") {
+                cout << "evento valido " << endl;
+            }
+            else {
+                cout << "evento INVALIIIIDO" << endl;
+            }
+
+        }
+        else
+        {
+            cout << "¡Error! No existe el ID del operador." << endl;
+            cout << "¿Desea agregar un operador? (SI/NO): ";
+            cin >> eleccion;
+
+            for (char& c : eleccion) {  // recorre cada caracter de ocpion y lo pone mayuscula con toupper
+                c = toupper(c);
+            }
+
+            if (eleccion == "SI") {
+                cout << "Ingrese el Nombre: ";
+                cin >> nombre;
+                cout << "Ingrese la Ciudad de residencia: ";
+                cin >> ciudad;
+                cout << "Ingrese el ID del equipo: ";
+                cin >> idEquipo;
+                cout << "Ingrese el evento de salud: ";
+                cin >> eventoSalud;
+
+                if (eventoSalud == "FrameTorqueExceeded" || eventoSalud == "Negative High Peak Frame Bias" ||
+                    eventoSalud == "Negative High Peak Frame Pitch" || eventoSalud == "Negative High Peak Frame Rack" ||
+                    eventoSalud == "Positive High Peak Frame Bias" || eventoSalud == "Positive High Peak Frame Pitch" ||
+                    eventoSalud == "Positive High Peak Frame Rack" || eventoSalud == "Sprung Weight Exceeded") {
+                    while (valorRegistro <= 0)
+                    {
+                        cout << "Ingrese valor de registro: ";
+                        cin >> valorRegistro;
+                        if (valorRegistro <= 0) {
+                            cout << "¡Error! Valor de registro invalido." << endl;
+                        }
+                    }
+                    Trabajador nuevo(inID, nombre, ciudad);
+                    Evento evento(idEquipo, inID, eventoSalud, valorRegistro);
+                    arbol->insertar(nuevo);
+                    maxheap->insert(evento);
+                    agregar = true;
+                }
+                else {
+                    cout << "evento INVALIIIIDO" << endl;
+                    cout << eventoSalud << endl;
+                    break;
+                }
+            }
+            else if (eleccion == "NO") {}
+        }
+        agregar = true;
+    }
+}
+
+void Menu::atenderUnEquipo()
+{
+    int id = maxheap->idRaiz();
+    if (id > 0) {
+        arbol->desplegarInformacion(id);
+    }
+    maxheap->eliminarRaiz();
 }

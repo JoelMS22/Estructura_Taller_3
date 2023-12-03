@@ -1,4 +1,5 @@
 #include "AVL.h"
+#include "Trabajador.h"
 #include <iostream>
 using namespace std;
 
@@ -75,6 +76,7 @@ bool AVL::buscarIdRec(Nodo* nodo, int id)
         return false;
     }
     if (nodo->getDato() == id) {
+        nodo->getTrabajador().infoTrabajador();
         return true;
     }
     if (id < nodo->getDato()) {
@@ -179,6 +181,13 @@ void AVL::eliminarArbol()
     return eliminarArbolRec(this->raiz);
     raiz = nullptr;
 }
+
+void AVL::desplegarInformacion(int id) {
+    if (!buscarIdRec(raiz, id)) {
+        cout << "No se encontro ningun trabajador con esa ID." << endl;
+    }
+}
+
 
 
 
