@@ -101,6 +101,89 @@ int MaxHeap::idRaiz()
     }
 }
 
+float MaxHeap::sumarFloatValues()
+{
+    int suma = 0;
+
+    for (size_t i = 1; i < heap.size(); ++i) {
+        suma += heap[i]->getFloatValue();
+
+    }
+
+    return suma;
+}
+
+int MaxHeap::getSize() {
+    return heap.size();
+}
+
+void MaxHeap::llenarContadores() {
+    for (int i = 0; i < 8; ++i) {
+        contadores[i] = 0;
+    }
+}
+
+void MaxHeap::getPorcentajeEventos()
+{
+
+    llenarContadores();
+
+    for (size_t i = 1; i < heap.size(); ++i) {
+
+        if (heap[i]->getEvent() == "Frame Torque Exceeded") {
+            contadores[0] += 1;
+        }
+        if (heap[i]->getEvent() == "Negative High Peak Frame Bias") {
+            contadores[1] += 1;
+        }
+        if (heap[i]->getEvent() == "Negative High Peak Frame Pitch") {
+            contadores[2] += 1;
+        }
+        if (heap[i]->getEvent() == "Negative High Peak Frame Rack") {
+            contadores[3] += 1;
+        }
+        if (heap[i]->getEvent() == "Positive High Peak Frame Bias") {
+            contadores[4] += 1;
+
+        }
+        if (heap[i]->getEvent() == "Positive High Peak Frame Pitch") {
+            contadores[5] += 1;
+        }
+        if (heap[i]->getEvent() == "Positive High Peak Frame Rack") {
+            contadores[6] += 1;
+        }
+        if (heap[i]->getEvent() == "Sprung Weight Exceeded") {
+            contadores[7] += 1;
+        }
+
+    }
+
+    if (contadores[0] > 0) {
+        cout << "El porcentaje de Frame Torque Exceeded es: " << (static_cast<double>(contadores[0]) / getSize()) * 100;
+    }
+    if (contadores[1] > 0) {
+        cout << "El porcentaje de Negative High Peak Frame Bias es: " << (static_cast<double>(contadores[1]) / getSize()) * 100;
+    }
+    if (contadores[2] > 0) {
+        cout << "El porcentaje de Negative High Peak Frame Pitch es: " << (static_cast<double>(contadores[2]) / getSize()) * 100;
+    }
+    if (contadores[3] > 0) {
+        cout << "El porcentaje de Negative High Peak Frame Rack es: " << (static_cast<double>(contadores[3]) / getSize()) * 100;
+    }
+    if (contadores[4] > 0) {
+        cout << "El porcentaje de Positive High Peak Frame Bias es: " << (static_cast<double>(contadores[4]) / getSize()) * 100;
+    }
+    if (contadores[5] > 0) {
+        cout << "El porcentaje de Positive High Peak Frame Pitch es: " << (static_cast<double>(contadores[5]) / getSize()) * 100;
+    }
+    if (contadores[6] > 0) {
+        cout << "El porcentaje de Positive High Peak Frame Rack es: " << (static_cast<double>(contadores[6]) / getSize()) * 100;
+    }
+    if (contadores[7] > 0) {
+        cout << "El porcentaje de Sprung Weight Exceeded es: " << (static_cast<double>(contadores[7]) / getSize()) * 100;
+    }
+}
+
 MaxHeap::~MaxHeap() {
     // Liberar la memoria de todos los objetos Evento almacenados en el heap
     for (size_t i = 1; i < heap.size(); ++i) {

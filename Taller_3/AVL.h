@@ -14,6 +14,7 @@ private:
 	Nodo* insertar(Nodo* nodo, Trabajador trabajador);
 	void inOrder(Nodo* nodo);
 	bool buscarIdRec(Nodo* nodo, int id);
+	bool buscarIdRecInfo(Nodo* nodo, int id);
 	void eliminarArbolRec(Nodo* nodo);
 
 public:
@@ -27,7 +28,7 @@ public:
 	int TotalNodos();
 	bool buscarId(int id);
 	void eliminarArbol();
-	void desplegarInformacion(int id);
+	void buscarIdInfo(int id);
 	void obtenerTodasLasId(Nodo* nodo, vector<int>& todasLasId);
 
 

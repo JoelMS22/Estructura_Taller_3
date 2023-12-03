@@ -18,6 +18,7 @@ public:
     void mostrarMenu();
     void agregarEventoDeSalud();
     void atenderUnEquipo();
-
+    void porcentajeTipoEvento();
+    float promedioSeveridad();
     void operadoresAusentes();
 };

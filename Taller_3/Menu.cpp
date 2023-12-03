@@ -18,8 +18,7 @@ string Menu::agregarEspacios(string palabra)
 }
 
 void Menu::mostrarMenu()
-{
-   
+{ 
     bool salir = false;
     int opcion;
     while (!salir) {
@@ -49,8 +48,10 @@ void Menu::mostrarMenu()
             atenderUnEquipo();
             break;
         case 3:
-            cout << "-------     REPORTABILIDAD    -------" << endl;
-
+            cout << "-------     REPORTABILIDAD    -------" << endl<< endl;
+        //    porcentajeTipoEvento();
+            cout << "Severidad Promedio de Eventos pendientes: " << promedioSeveridad() << endl;
+            cout << "----------------------------------------" << endl;
             cout << "OPERADORES AUSENTES EN EVENTOS DE SALUD: " << endl << endl;
             operadoresAusentes();
             break;
@@ -98,16 +99,29 @@ void Menu::agregarEventoDeSalud()
             cin >> idEquipo;
             cout << "Ingrese el evento de salud (Formato AaBbCc): ";
             cin >> salud;
-
             string eventoSalud = agregarEspacios(salud);
+
             if (eventoSalud == "Frame Torque Exceeded" || eventoSalud == "Negative High Peak Frame Bias" ||
                 eventoSalud == "Negative High Peak Frame Pitch" || eventoSalud == "Negative High Peak Frame Rack" ||
                 eventoSalud == "Positive High Peak Frame Bias" || eventoSalud == "Positive High Peak Frame Pitch" ||
                 eventoSalud == "Positive High Peak Frame Rack" || eventoSalud == "Sprung Weight Exceeded") {
-                cout << "evento valido " << endl;
+                
+                while(valorRegistro <= 0)
+                {
+                    cout << "Ingrese valor de registro: ";
+                    cin >> valorRegistro;
+                    if (valorRegistro <= 0) {
+                        cout << "¡Error! Valor de registro invalido." << endl;
+                    }
+                }
+                Evento evento(idEquipo, inID, eventoSalud, valorRegistro);
+                maxheap->insert(evento);
+                agregar = true;
+
             }
             else {
-                cout << "evento INVALIIIIDO" << endl;
+                cout << "Evento invalido" << endl;
+                break;
             }
 
         }
@@ -150,8 +164,7 @@ void Menu::agregarEventoDeSalud()
                     agregar = true;
                 }
                 else {
-                    cout << "evento INVALIIIIDO" << endl;
-                    cout << eventoSalud << endl;
+                    cout << "Evento invalido" << endl;
                     break;
                 }
             }
@@ -165,9 +178,24 @@ void Menu::atenderUnEquipo()
 {
     int id = maxheap->idRaiz();
     if (id > 0) {
-        arbol->desplegarInformacion(id);
+        arbol->buscarIdInfo(id);
     }
     maxheap->eliminarRaiz();
+}
+
+void Menu::porcentajeTipoEvento()
+{
+    maxheap->getPorcentajeEventos();
+}
+
+float Menu::promedioSeveridad()
+{
+    if (maxheap->getSize() != 0) {
+        return maxheap->sumarFloatValues() / maxheap->getSize();
+    }
+    else {
+        return 0;
+    }
 }
 
 void Menu::operadoresAusentes()
@@ -178,12 +206,11 @@ void Menu::operadoresAusentes()
         bool existeEnMaxHeap = maxheap->existeId(id);
 
         if (!existeEnMaxHeap) {
-        //    std::cout << "El ID " << id << " existe tanto en el AVL como en el MaxHeap." << std::endl;
-        //}
-       // else {
-          //  std::cout << "El ID " << id << " no existe en el MaxHeap." << std::endl;
-            arbol->buscarId(id);
+
+            arbol->buscarIdInfo(id);
             cout << endl;
         }
     }
 }
+
+

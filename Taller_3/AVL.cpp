@@ -72,7 +72,6 @@ bool AVL::buscarIdRec(Nodo* nodo, int id)
         return false;
     }
     if (nodo->getDato() == id) {
-        nodo->getTrabajador().infoTrabajador();
         return true;
     }
     if (id < nodo->getDato()) {
@@ -81,6 +80,26 @@ bool AVL::buscarIdRec(Nodo* nodo, int id)
     else
     {
         return buscarIdRec(nodo->getDer(), id);
+    }
+
+    return false;
+}
+
+bool AVL::buscarIdRecInfo(Nodo* nodo, int id)
+{
+    if (nodo == nullptr) {
+        return false;
+    }
+    if (nodo->getDato() == id) {
+        nodo->getTrabajador().infoTrabajador();
+        return true;
+    }
+    if (id < nodo->getDato()) {
+        return buscarIdRecInfo(nodo->getIzq(), id);
+    }
+    else
+    {
+        return buscarIdRecInfo(nodo->getDer(), id);
     }
 
     return false;
@@ -178,8 +197,8 @@ void AVL::eliminarArbol()
     raiz = nullptr;
 }
 
-void AVL::desplegarInformacion(int id) {
-    if (!buscarIdRec(raiz, id)) {
+void AVL::buscarIdInfo(int id) {
+    if (!buscarIdRecInfo(raiz, id)) {
         cout << "No se encontro ningun trabajador con esa ID." << endl;
     }
 }
