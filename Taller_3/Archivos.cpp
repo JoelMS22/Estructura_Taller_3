@@ -48,26 +48,17 @@ void Archivos::lecturaArchivos(AVL& avl, MaxHeap& maxheap) {
             if (operatorIds.find(operatorId) == operatorIds.end()) {
                 continue; // Si no está, se salta al siguiente ciclo sin leer esta línea
             }
-
             // Si está en el conjunto, se lee la línea normalmente
             getline(lineStream, event, ';');
-
             getline(lineStream, floatValueStr, ';');
             float floatValue = stof(floatValueStr);
             Evento evento(equipementID, operatorId, event, floatValue);
             maxheap.insert(evento);
         }
-
         workers.close();
         minecare_events.close();
-
     }
     else {
         cout << "Hubo un error al abrir uno de los archivos." << endl;
     }
-
-    maxheap.printHeap();
-    cout << endl;
-    avl.imprimirEnOrden();
-    cout << endl;
 }

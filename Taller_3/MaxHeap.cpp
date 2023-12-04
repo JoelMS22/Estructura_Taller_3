@@ -119,7 +119,7 @@ int MaxHeap::getSize() {
 
 void MaxHeap::llenarContadores() {
     for (int i = 0; i < 8; ++i) {
-        contadores[i] = 0;
+        contadores.push_back(0);
     }
 }
 
@@ -159,29 +159,40 @@ void MaxHeap::getPorcentajeEventos()
     }
 
     if (contadores[0] > 0) {
-        cout << "El porcentaje de Frame Torque Exceeded es: " << (static_cast<double>(contadores[0]) / getSize()) * 100;
+
+        cout << "El porcentaje de Frame Torque Exceeded es: " << (static_cast<double>(contadores[0]) / (getSize() - 1)) * 100 << "%";
+
+        cout << "" << endl;
     }
     if (contadores[1] > 0) {
-        cout << "El porcentaje de Negative High Peak Frame Bias es: " << (static_cast<double>(contadores[1]) / getSize()) * 100;
+        cout << "El porcentaje de Negative High Peak Frame Bias es: " << (static_cast<double>(contadores[1]) / (getSize() - 1)) * 100 << "%";
+        cout << "" << endl;
     }
     if (contadores[2] > 0) {
-        cout << "El porcentaje de Negative High Peak Frame Pitch es: " << (static_cast<double>(contadores[2]) / getSize()) * 100;
+        cout << "El porcentaje de Negative High Peak Frame Pitch es: " << (static_cast<double>(contadores[2]) / (getSize() - 1)) * 100 << "%";
+        cout << "" << endl;
     }
     if (contadores[3] > 0) {
-        cout << "El porcentaje de Negative High Peak Frame Rack es: " << (static_cast<double>(contadores[3]) / getSize()) * 100;
+        cout << "El porcentaje de Negative High Peak Frame Rack es: " << (static_cast<double>(contadores[3]) / (getSize() - 1)) * 100 << "%";
+        cout << "" << endl;
     }
     if (contadores[4] > 0) {
-        cout << "El porcentaje de Positive High Peak Frame Bias es: " << (static_cast<double>(contadores[4]) / getSize()) * 100;
+        cout << "El porcentaje de Positive High Peak Frame Bias es: " << (static_cast<double>(contadores[4]) / (getSize() - 1)) * 100 << "%";
+        cout << "" << endl;
     }
     if (contadores[5] > 0) {
-        cout << "El porcentaje de Positive High Peak Frame Pitch es: " << (static_cast<double>(contadores[5]) / getSize()) * 100;
+        cout << "El porcentaje de Positive High Peak Frame Pitch es: " << (static_cast<double>(contadores[5]) / (getSize() - 1)) * 100 << "%";
+        cout << "" << endl;
     }
     if (contadores[6] > 0) {
-        cout << "El porcentaje de Positive High Peak Frame Rack es: " << (static_cast<double>(contadores[6]) / getSize()) * 100;
+        cout << "El porcentaje de Positive High Peak Frame Rack es: " << (static_cast<double>(contadores[6]) / (getSize() - 1)) * 100 << "%";
+        cout << "" << endl;
     }
     if (contadores[7] > 0) {
-        cout << "El porcentaje de Sprung Weight Exceeded es: " << (static_cast<double>(contadores[7]) / getSize()) * 100;
+        cout << "El porcentaje de Sprung Weight Exceeded es: " << (static_cast<double>(contadores[7]) / (getSize() - 1)) * 100 << "%";
+        cout << "" << endl;
     }
+    contadores.clear();
 }
 
 MaxHeap::~MaxHeap() {

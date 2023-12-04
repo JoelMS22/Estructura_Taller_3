@@ -49,10 +49,9 @@ void Menu::mostrarMenu()
             break;
         case 3:
             cout << "-------     REPORTABILIDAD    -------" << endl<< endl;
-        //    porcentajeTipoEvento();
-            cout << "Severidad Promedio de Eventos pendientes: " << promedioSeveridad() << endl;
-            cout << "----------------------------------------" << endl;
-            cout << "OPERADORES AUSENTES EN EVENTOS DE SALUD: " << endl << endl;
+            porcentajeTipoEvento();
+            cout << endl << "Severidad Promedio de Eventos pendientes: " << promedioSeveridad() << endl;
+            cout << endl << "OPERADORES AUSENTES EN EVENTOS DE SALUD: " << endl << endl;
             operadoresAusentes();
             break;
         case 4:
